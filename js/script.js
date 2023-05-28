@@ -5,6 +5,7 @@ const global = {
     term: '',
     page: 1,
     totalPages: 1,
+    totalResults: 0,
   },
   api: {
     apiKey: 'fd8d3dab48909db84857be6066ec11f1',
@@ -49,7 +50,7 @@ async function searchApiData() {
 
   showSpinner();
   const response = await fetch(
-    `${API_URL}search/${global.search.type}?api_key=${API_KEY}&language=en-US&query=${global.search.term}`
+    `${API_URL}search/${global.search.type}?api_key=${API_KEY}&language=en-US&query=${global.search.term}&page=${global.search.page}`
   );
 
   const data = await response.json();
@@ -287,7 +288,11 @@ async function search() {
 
   if (global.search.term !== '' && global.search.term !== null) {
     // @todo - make request and display results
-    const { results, total_pages, page } = await searchApiData();
+    const { results, total_pages, page, total_results } = await searchApiData();
+
+    global.search.page = page;
+    global.search.totalPages = total_pages;
+    global.search.totalResults = total_results;
 
     if (results.length === 0) {
       showAlert('No results found');
@@ -301,8 +306,13 @@ async function search() {
 }
 
 function displaySearchResults(results) {
+  document.getElementById('search-results-heading').innerHTML = '';
+  document.getElementById('search-results').innerHTML = '';
+  document.getElementById('pagination').innerHTML = '';
+
   results.forEach((result) => {
     const div = document.createElement('div');
+    div.classList.add('card');
     div.innerHTML = `
       <a href="${global.search.type}-details.html?id=${result.id}">
         ${
@@ -332,8 +342,39 @@ function displaySearchResults(results) {
         </p>
       </div>
     `;
-
-    document.getElementById('search-results').appendChild(div);
+    document.getElementById('search-results-heading').innerHTML = `
+          <h2>${results.length} of ${global.search.totalResults} Results for ${global.search.term}</h2>
+      `;
+    document.querySelector('#search-results').appendChild(div);
+  });
+  displayPagination();
+}
+// Create and display pagination for search
+function displayPagination() {
+  const div = document.createElement('div');
+  div.classList.add('pagination');
+  div.innerHTML = `
+    <button class="btn btn-primary" id="prev">Prev</button>
+    <button class="btn btn-primary" id="next">Next</button>
+    <div class="page-counter">Page ${global.search.page} of ${global.search.totalPages}</div>
+  `;
+  document.getElementById('pagination').appendChild(div);
+  // Disable prev button if on first page
+  global.search.page === 1 && (document.getElementById('prev').disabled = true);
+  // Disable next button if on last page
+  global.search.page === global.search.totalPages &&
+    (document.getElementById('next').disabled = true);
+  // Next Page
+  document.getElementById('next').addEventListener('click', async () => {
+    global.search.page++;
+    const { results, total_pages } = await searchApiData();
+    displaySearchResults(results);
+  });
+  // Previous Page
+  document.getElementById('prev').addEventListener('click', async () => {
+    global.search.page--;
+    const { results, total_pages } = await searchApiData();
+    displaySearchResults(results);
   });
 }
 // Show Alert

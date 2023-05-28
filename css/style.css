@@ -43,7 +43,8 @@ body.dark .swiper-slide {
 body.dark #search-results-wrapper button,
 body.dark h2,
 body.dark #movie-details,
-body.dark #show-details {
+body.dark #show-detail,
+body.dark #search-results-heading h2 {
   color: var(--color-text-dark);
 }
 a {
@@ -219,6 +220,15 @@ section h2 {
   color: var(--color-text-dark);
 }
 
+section.now-playing a {
+  box-shadow: 0 5px 10px #000;
+  transition: all 0.45s ease-in;
+}
+
+section.now-playing a:hover {
+  transform: scale(1.03);
+}
+
 /* Slider */
 .swiper {
   width: 100%;
@@ -306,6 +316,10 @@ section h2 {
 
 .search .container h2 {
   margin-bottom: 20px;
+}
+
+#search-results-heading h2 {
+  color: var(--color-text-light);
 }
 
 .search .container form {
