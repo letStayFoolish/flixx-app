@@ -10,9 +10,11 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="lib/swiper.css" />
     <link rel="stylesheet" href="lib/fontawesome.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/spinner.css" />
+    <script src="lib/swiper.js"></script>
     <script src="js/script.js" defer></script>
     <title>Flixx</title>
   </head>
@@ -28,10 +30,28 @@
             <li>
               <a class="nav-link" href="/shows.html">TV Shows</a>
             </li>
+            <li>
+              <div class="buttonToggler">
+                <input type="checkbox" class="checkbox" id="checkbox" />
+                <label for="checkbox" class="checkbox-label">
+                  <i class="fas fa-moon"></i>
+                  <i class="fas fa-sun"></i>
+                  <span class="ball"></span>
+                </label>
+              </div>
+            </li>
           </ul>
         </nav>
       </div>
     </header>
+
+    <!-- Now Playing Section -->
+    <section class="now-playing">
+      <h2>On The Air</h2>
+      <div class="swiper">
+        <div class="swiper-wrapper"></div>
+      </div>
+    </section>
 
     <!-- Popular TV Shows -->
     <section class="container">

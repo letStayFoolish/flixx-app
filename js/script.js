@@ -11,6 +11,21 @@ const global = {
     apiUrl: 'https://api.themoviedb.org/3/',
   },
 };
+// Dark/Light Moder Toggle
+const checkbox = document.getElementById('checkbox');
+function setDarOrLightModeAuto() {
+  const data = new Date();
+  const time = data.getHours();
+  if (time > 17 || time < 6) {
+    document.body.classList.add('dark');
+  } else {
+    document.body.classList.remove('dark');
+  }
+}
+function toggleDarkLightMode() {
+  document.body.classList.toggle('dark');
+}
+checkbox.addEventListener('change', toggleDarkLightMode);
 // Fetch the data from API
 async function fetchAPIData(endpoint) {
   // Register your key at: https://www.themoviedb.org/settings/api and enter here
@@ -288,7 +303,6 @@ async function search() {
 function displaySearchResults(results) {
   results.forEach((result) => {
     const div = document.createElement('div');
-    div.classList.add('card');
     div.innerHTML = `
       <a href="${global.search.type}-details.html?id=${result.id}">
         ${
@@ -334,7 +348,7 @@ function showAlert(message, className = 'alert-error') {
 // Display Now Playing Movies
 async function displaySlider() {
   const { results } = await fetchAPIData('movie/now_playing');
-  console.log(results);
+
   results.forEach((movie) => {
     const div = document.createElement('div');
     div.classList.add('swiper-slide');
@@ -344,6 +358,25 @@ async function displaySlider() {
       </a>
       <h4 class="swiper-rating">
         <i class="fas fa-star text-secondary"></i> ${movie.vote_average} / 10
+      </h4>
+    `;
+    document.querySelector('.swiper-wrapper').appendChild(div);
+    initSwiper();
+  });
+}
+// Display Now Playing TV Shows
+async function displaySliderTV() {
+  const { results } = await fetchAPIData(`tv/on_the_air`);
+
+  results.forEach((show) => {
+    const div = document.createElement('div');
+    div.classList.add('swiper-slide');
+    div.innerHTML = `
+      <a href='tv-details.html?id=${show.id}'>
+        <img src="https://image.tmdb.org/t/p/w500${show.poster_path}" alt="${show.name}" />
+      </a>
+      <h4 class="swiper-rating">
+        <i class="fas fa-star text-secondary"></i> ${show.vote_average} / 10
       </h4>
     `;
     document.querySelector('.swiper-wrapper').appendChild(div);
@@ -387,10 +420,11 @@ function init() {
   switch (global.currentPage) {
     case '/':
     case '/index.html':
-      displaySlider();
+      displaySlider('movie');
       displayPopularMovies();
       break;
     case '/shows.html':
+      displaySliderTV();
       displayPopularTVShows();
       break;
     case '/movie-details.html':
@@ -404,6 +438,7 @@ function init() {
       break;
   }
   highlightActiveLink();
+  setDarOrLightModeAuto();
 }
 
 window.addEventListener('DOMContentLoaded', init);
