@@ -12,21 +12,46 @@ const global = {
     apiUrl: 'https://api.themoviedb.org/3/',
   },
 };
-// Dark/Light Moder Toggle
+// Dark/Light Mode Toggle
 const checkbox = document.getElementById('checkbox');
-function setDarOrLightModeAuto() {
+function setDarkOrLightModeAuto() {
   const data = new Date();
   const time = data.getHours();
-  if (time > 17 || time < 6) {
+
+  if (time >= 17 || time < 6) {
     document.body.classList.add('dark');
+    checkbox.checked = true;
   } else {
     document.body.classList.remove('dark');
+    checkbox.checked = false;
   }
 }
-function toggleDarkLightMode() {
-  document.body.classList.toggle('dark');
+setDarkOrLightModeAuto();
+
+// Check current mode and store it on local storage
+function toggleTheme() {
+  let setTheme = document.body;
+  setTheme.classList.toggle('dark');
+  let theme;
+
+  if (setTheme.classList.contains('dark')) {
+    theme = 'dark-mode';
+  } else {
+    theme = 'light-mode';
+  }
+
+  localStorage.setItem('PageTheme', JSON.stringify(theme));
+  localStorage.removeItem('PageTheme-Auto');
 }
-checkbox.addEventListener('change', toggleDarkLightMode);
+let getTheme = JSON.parse(localStorage.getItem('PageTheme'));
+if (getTheme === 'dark-mode') {
+  document.body.classList.add('dark');
+  checkbox.checked = true;
+} else if (getTheme === 'light-mode') {
+  document.body.classList.remove('dark');
+  checkbox.checked = false;
+}
+checkbox.addEventListener('change', toggleTheme);
 // Fetch the data from API
 async function fetchAPIData(endpoint) {
   // Register your key at: https://www.themoviedb.org/settings/api and enter here
@@ -479,7 +504,7 @@ function init() {
       break;
   }
   highlightActiveLink();
-  setDarOrLightModeAuto();
+  // setDarkOrLightModeAuto();
 }
 
 window.addEventListener('DOMContentLoaded', init);
