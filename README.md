@@ -4,9 +4,9 @@ Movie info application built with vanilla JavaScript that uses **version 3** of 
 
 This is part of my **Modern JS From The Beginning 2.0** course
 
-<img src="images/screen.jpg" width="500">
+<img src="images/Screenshot%202023-05-28%20at%2015.18.png" width="100%">
 
-This includes the most populr movies and TV shows with detail pages, a search box for movies and shows with full pagination and a slider for movies that are currently playing in theaters. The slider uses the [Swiper](https://swiperjs.com) library.
+This includes the most populr movies and TV shows with detail pages, a search box for movies and shows with full pagination and a slider for movies that are currently playing in theaters. The slider uses the [Swiper](https://swiperjs.com) library. Also there is possibility to toggle light and dark mode.
 
 ## Usage
 
@@ -18,6 +18,7 @@ Once you get your key, just add it to the `api.apiKey` value in the global state
 
 I also may convert this to use a module bundler such as Vite or Webpack.
 
-## Theme (HTML & CSS)
+## Deploy
 
-I also included the theme here for you to download. It does not include any JavaScript at all. This is what you should use if you are following along with the course.
+Page is deployed via [Netlify](https://app.netlify.com/) pages.
+Check it on: https://movieappflixx.netlify.app/.
