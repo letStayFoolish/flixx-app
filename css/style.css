@@ -7,48 +7,37 @@
 }
 
 :root {
-  --color-primary-dark: #221f1f;
-  --color-primary-light: #fff;
   --color-secondary: #f1c40f;
-  --color-text-dark: #fff;
-  --color-text-light: #000;
 }
+
 /* BODY LIGHT MODE */
 body {
+  --text-color: #000;
+  --background-color: #fff;
+  --text-color-opposite: #fff;
+  --background-on-hover: #ebeced;
+
+  background: var(--background-color);
+  color: var(--text-color);
+
   font-family: 'Poppins', sans-serif;
   font-size: 16px;
-  background: var(--color-primary-light);
-  color: var(--color-text-light);
   overflow-x: hidden;
 }
+
 /* BODY DARK MODE */
 body.dark {
-  background-color: var(--color-primary-dark);
+  --background-color: #221f1f;
+  --text-color: #fff;
+  --text-color-opposite: #000;
+  --background-on-hover: #221f1f;
+
+  background: var(--background-color);
+  color: var(--text-color);
 }
 
-body.dark .main-header,
-body.dark .main-header .logo,
-body.dark a,
-body.dark .card,
-body.dark .search-radio,
-body.dark .main-footer,
-body.dark .main-footer div .logo,
-body.dark .main-footer div .social-links a,
-body.dark #search-results-wrapper,
-body.dark .swiper-slide {
-  background: var(--color-primary-dark);
-  color: var(--color-text-dark);
-}
-
-body.dark #search-results-wrapper button,
-body.dark h2,
-body.dark #movie-details,
-body.dark #show-detail,
-body.dark #search-results-heading h2 {
-  color: var(--color-text-dark);
-}
 a {
-  color: var(--color-text-light);
+  color: var(--text-color);
   text-decoration: none;
 }
 
@@ -78,7 +67,7 @@ body.dark .active {
   padding: 0.5rem 1rem;
   border: 1px solid var(--color-secondary);
   border-radius: 5px;
-  color: var(--color-text-light);
+  color: var(--text-color);
   cursor: pointer;
   background: transparent;
   transition: all 0.3s ease-in-out;
@@ -86,7 +75,7 @@ body.dark .active {
 
 .btn:hover {
   background: var(--color-secondary);
-  color: var(--color-text-dark);
+  color: var(--text-color);
 }
 
 .btn:disabled {
@@ -115,11 +104,11 @@ body.dark .active {
 
 .main-header {
   padding: 20px 0;
-  background: var(--color-primary-light);
+  background: var(--background-color);
 }
 
 .main-header .logo {
-  color: #fff;
+  color: var(--text-color);
   font-size: 25px;
   font-weight: 700;
   text-transform: uppercase;
@@ -150,7 +139,7 @@ body.dark .active {
 
 /* Card */
 .card {
-  background: var(--color-primary-light);
+  background: var(--background-color);
   padding: 5px;
   border-radius: 0 0 10px 10px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.8);
@@ -168,13 +157,12 @@ body.dark .active {
 .card:hover {
   transform: scale(1.05);
   transition: all 0.5s ease-in-out;
-  background: #ebeced;
+  background: var(--background-on-hover);
 }
 
 /* Footer */
 .main-footer {
-  background: var(--color-primary-light);
-  /* background: #020d18; */
+  background: var(--background-color);
   padding: 20px 0;
   margin-top: 20px;
 }
@@ -186,7 +174,7 @@ body.dark .active {
 }
 
 .main-footer .container .logo {
-  color: var(--color-text-light);
+  color: var(--text-color);
   font-size: 25px;
   font-weight: 700;
   text-transform: uppercase;
@@ -199,7 +187,7 @@ body.dark .active {
 
 .main-footer .container .social-links a {
   margin-left: 10px;
-  color: var(--color-text-light);
+  color: var(--text-color);
 }
 
 .main-footer .container .social-links a:hover {
@@ -217,7 +205,7 @@ section h2 {
   margin: 20px 0;
   text-align: center;
   text-transform: uppercase;
-  color: var(--color-text-dark);
+  color: var(--text-color);
 }
 
 section.now-playing a {
@@ -238,7 +226,7 @@ section.now-playing a:hover {
 .swiper-slide {
   text-align: center;
   font-size: 18px;
-  background: #221f1f;
+  background: var(--background-color);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -246,7 +234,7 @@ section.now-playing a:hover {
 }
 
 .swiper-wrapper div {
-  background: var(--color-primary-light);
+  background: var(--background-color);
 }
 
 .swiper-slide img {
@@ -297,7 +285,7 @@ section.now-playing a:hover {
 .details-bottom li {
   margin: 15px 0;
   padding-bottom: 8px;
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid var(--text-color);
   border-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -319,7 +307,7 @@ section.now-playing a:hover {
 }
 
 #search-results-heading h2 {
-  color: var(--color-text-light);
+  color: var(--text-color);
 }
 
 .search .container form {
@@ -344,22 +332,16 @@ section.now-playing a:hover {
   height: 50px;
   padding: 10px;
   margin-right: 10px;
-  border: 1px solid var(--color-primary-dark);
+  border: 1px solid var(--text-color);
   border-radius: 5px;
   background: transparent;
-  color: var(--color-text-light);
+  color: var(--text-color);
 }
 
 .search .container form input[type='text']::placeholder {
-  color: var(--color-text-light);
+  color: var(--text-color);
 }
-body.dark .search .container form input[type='text']::placeholder {
-  color: var(--color-text-dark);
-}
-body.dark .search .container form input[type='text'] {
-  border: 1px solid var(--color-primary-light);
-  color: var(--color-text-dark);
-}
+
 .search .container form input[type='text']:focus {
   outline: none;
 }
@@ -373,15 +355,12 @@ body.dark .search .container form input[type='text'] {
   height: 50px;
   cursor: pointer;
   background: var(--color-secondary);
-  color: #000;
+  color: var(--text-color);
 }
 
 .search .container form button:hover {
   background: transparent;
-  color: var(--color-text-light);
-}
-body.dark .search .container form button:hover {
-  color: var(--color-text-dark);
+  color: var(--text-color);
 }
 
 .pagination {
@@ -412,7 +391,7 @@ body.dark .search .container form button:hover {
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 .buttonToggler {
-  border: 1px solid #fff;
+  border: 1px solid var(--text-color);
   border-radius: 15px;
 }
 .checkbox {
