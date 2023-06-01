@@ -483,6 +483,9 @@ function highlightActiveLink() {
 }
 // Init App
 function init() {
+  // Clear the local storage every time page gets reload
+  localStorage.removeItem('PageTheme');
+
   switch (global.currentPage) {
     case '/':
     case '/index.html':

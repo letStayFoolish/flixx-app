@@ -6,7 +6,7 @@ This is part of my **Modern JS From The Beginning 2.0** course
 
 <img src="images/Screenshot%202023-05-28%20at%2015.18.png" width="100%">
 
-This includes the most populr movies and TV shows with detail pages, a search box for movies and shows with full pagination and a slider for movies that are currently playing in theaters. The slider uses the [Swiper](https://swiperjs.com) library. Also there is possibility to toggle light and dark mode.
+This includes the most popular movies and TV shows with detail pages, a search box for movies and shows with full pagination and a slider for movies that are currently playing in theaters. The slider uses the [Swiper](https://swiperjs.com) library. Also there is possibility to toggle light and dark mode.
 
 ## Usage
 
